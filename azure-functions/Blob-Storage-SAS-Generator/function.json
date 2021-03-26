@@ -1,0 +1,17 @@
+{
+    "bindings": [
+        {
+            "name": "req",
+            "route": "blob-storage-sas-generator",
+            "authLevel": "function",
+            "methods": ["get"],
+            "direction": "in",
+            "type": "httpTrigger"
+        },
+        {
+            "type": "http",
+            "direction": "out",
+            "name": "res"
+        }
+    ]
+}

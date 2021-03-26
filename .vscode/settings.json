@@ -1,0 +1,13 @@
+{
+    "editor.fontSize": 16,
+    "azureFunctions.deploySubpath": "azure-functions",
+    "azureFunctions.projectSubpath": "azure-functions",
+    "azureFunctions.postDeployTask": "npm install",
+    "azureFunctions.projectLanguage": "JavaScript",
+    "azureFunctions.projectRuntime": "~3",
+    "debug.internalConsoleOptions": "neverOpen",
+    "azureFunctions.preDeployTask": "npm prune",
+    "restructuredtext.confPath": "",
+    "restructuredtext.languageServer.disabled": true,
+    "restructuredtext.linter.disabled": true,
+}

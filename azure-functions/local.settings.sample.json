@@ -1,0 +1,16 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "",
+        "FUNCTIONS_WORKER_RUNTIME": "node",
+        "AZURE_STORAGE_ACCOUNT": "quickshare",
+        "AZURE_STORAGE_ACCESS_KEY": "YOUR_KEY",
+        "REDIS_ENDPOINT": "",
+        "REDIS_TLS": "False",
+        "REDIS_PORT": "17236",
+        "REDIS_DB": "0",
+        "REDIS_FAMILY": "4",
+        "REDIS_USERNAME": "",
+        "REDIS_PASSWORD": ""
+    }
+}

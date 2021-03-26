@@ -1,0 +1,16 @@
+{
+    "name": "azure-functions",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "func start",
+        "sas-generator": "func start --functions Blob-Storage-SAS-Generator",
+        "download-url-generator": "func start --functions Blob-Storage-Download-URL-Generator",
+        "url-shortener": "func start --functions URL-Shortener"
+    },
+    "dependencies": {
+        "@azure/storage-blob": "^12.5.0",
+        "ioredis": "^4.24.2",
+        "nanoid": "^3.1.22"
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "name": "main-app",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "if [[ $NODE_ENV == 'production' ]]; then node ./bin/www; else nodemon ./bin/www; fi"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TechLearnersInc/File-Sharing-WebApp.git"
+    },
+    "keywords": [],
+    "author": "TechLearners",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/TechLearnersInc/File-Sharing-WebApp/issues"
+    },
+    "homepage": "https://github.com/TechLearnersInc/File-Sharing-WebApp#readme",
+    "dependencies": {
+        "@azure/abort-controller": "^1.0.4",
+        "@azure/storage-blob": "^12.5.0",
+        "axios": "^0.21.1",
+        "cookie-parser": "~1.4.5",
+        "cookie-session": "^1.4.0",
+        "cors": "^2.8.5",
+        "debug": "~4.3.1",
+        "dotenv": "^8.2.0",
+        "ejs": "~3.1.6",
+        "express": "~4.17.1",
+        "http-errors": "~1.8.0",
+        "morgan": "~1.10.0",
+        "multer": "^1.4.2",
+        "serve-favicon": "^2.5.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.7"
+    }
+}

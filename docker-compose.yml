@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+    azure-functions:
+        container_name: azure-functions
+        build: azure-functions
+        restart: always
+        env_file: azure-functions/.env
+        working_dir: /home/site/wwwroot
+        ports:
+            - "7071:80"
+        # networks:
+        #     - app-network
+
+# networks:
+#     app-network:
+#         driver: host
+
+
