@@ -5,6 +5,7 @@ const CreateURL = async (req, redis) => {
     const URL_AS_KEY = nanoid(11);
     try {
         await redis.hset(URL_AS_KEY, 'filename', req.body.filename);
+        await redis.hset(URL_AS_KEY, 'filesize', req.body.filesize);
         await redis.hset(URL_AS_KEY, 'container', req.body.container);
         await redis.hset(URL_AS_KEY, 'expire', req.body.expire);
         await redis.expire(URL_AS_KEY, parseInt(req.body.expire));
@@ -43,6 +44,7 @@ const GetURL = async (req, redis) => {
                 body: {
                     success: true,
                     filename,
+                    filesize: await redis.hget(req.body.url_key, 'filesize'),
                     container: await redis.hget(req.body.url_key, 'container'),
                 },
             }
