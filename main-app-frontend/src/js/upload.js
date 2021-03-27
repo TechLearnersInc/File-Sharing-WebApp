@@ -111,11 +111,9 @@ fileURL.addEventListener("click", () => {
 const uploadFile = async () => {
     console.log("file added uploading");
     const file = fileInput.files[0];
-
-    let url;
-    let containerName;
-    const fileName = `${file.name.toString()}-${base64.encode(utf8.encode(uuidv4()))}`;
     const fileSize = file.size;
+    let url, containerName;
+    const fileName = `${file.name.toString()}-${base64.encode(utf8.encode(uuidv4()))}`;
     await ContainerName().then((response) => {
         url = `${storageURL}${response}/${fileName}`;
         containerName = response;
