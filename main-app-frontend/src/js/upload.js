@@ -115,6 +115,7 @@ const uploadFile = async () => {
     let url;
     let containerName;
     const fileName = `${file.name.toString()}-${base64.encode(utf8.encode(uuidv4()))}`;
+    const fileSize = file.size;
     await ContainerName().then((response) => {
         url = `${storageURL}${response}/${fileName}`;
         containerName = response;
@@ -132,14 +133,14 @@ const uploadFile = async () => {
         maxSingleShotSize: 1 * 1024 * 1024,
         onProgress: (progress) => {
             // find the percentage of uploaded
-            let percent = Math.round((100 * progress.loadedBytes) / file.size);
+            let percent = Math.round((100 * progress.loadedBytes) / fileSize);
             progressPercent.innerText = percent;
             const scaleX = `scaleX(${percent / 100})`;
             bgProgress.style.transform = scaleX;
             progressBar.style.transform = scaleX;
         },
     });
-    onFileUploadSuccess(await axios.post(linkGenerateApiUrl, { fileName, containerName })
+    onFileUploadSuccess(await axios.post(linkGenerateApiUrl, { fileName, fileSize, containerName })
         .then(response => JSON.stringify({
             file: response.data.shorturl,
         }))

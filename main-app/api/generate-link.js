@@ -19,6 +19,7 @@ const { log } = require("debug");
 // Link Generator
 router.post('/', CsrfParamCheck, (req, res) => {
     console.log(req.body.fileName);
+    console.log(req.body.fileSize);
     console.log(req.body.containerName);
     return res.json({
         shorturl: 'Hello World',
