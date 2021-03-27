@@ -112,9 +112,11 @@ const uploadFile = async () => {
     console.log("file added uploading");
     const file = fileInput.files[0];
     const fileSize = file.size;
-    let url, containerName;
-    // TODO: Filename bug fix
-    const fileName = `${file.name.toString()}-${base64.encode(utf8.encode(uuidv4()))}`;
+    let url, containerName, filename, file_ext;
+    filename = file.name.toString().split('.');
+    file_ext = filename[filename.length - 1];
+    filename = filename.slice(0, -1).join('.');
+    fileName = `${filename}-${base64.encode(utf8.encode(uuidv4()))}.${file_ext}`;
     await ContainerName().then((response) => {
         url = `${storageURL}${response}/${fileName}`;
         containerName = response;
