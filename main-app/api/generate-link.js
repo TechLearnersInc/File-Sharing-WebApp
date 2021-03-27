@@ -32,7 +32,9 @@ router.post('/', CsrfParamCheck, async (req, res) => {
         })
     };
     await axios(config)
-        .then(response => res.json(response.data))
+        .then(response => res.json({
+            shorturl: `${process.env.APP_BASE_URL}${response.data.url}`,
+        }))
         .catch((error) => {
             console.error(error);
             res.status(404).json({
