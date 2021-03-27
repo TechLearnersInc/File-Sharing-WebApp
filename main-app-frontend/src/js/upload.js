@@ -113,6 +113,7 @@ const uploadFile = async () => {
     const file = fileInput.files[0];
     const fileSize = file.size;
     let url, containerName;
+    // TODO: Filename bug fix
     const fileName = `${file.name.toString()}-${base64.encode(utf8.encode(uuidv4()))}`;
     await ContainerName().then((response) => {
         url = `${storageURL}${response}/${fileName}`;
