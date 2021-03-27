@@ -17,13 +17,28 @@ const { CsrfParamCheck } = require('../middleware/CsrfParam');
 const { log } = require("debug");
 
 // Link Generator
-router.post('/', CsrfParamCheck, (req, res) => {
-    console.log(req.body.fileName);
-    console.log(req.body.fileSize);
-    console.log(req.body.containerName);
-    return res.json({
-        shorturl: 'Hello World',
-    });
+router.post('/', CsrfParamCheck, async (req, res) => {
+    const config = {
+        method: 'post',
+        url: `${process.env.URL_SHORTENER_API}&action=create`,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: JSON.stringify({
+            "filename": req.body.fileName,
+            "filesize": req.body.fileSize,
+            "container": req.body.containerName,
+            "expire": 86400, // 1 day has 86400 seconds
+        })
+    };
+    await axios(config)
+        .then(response => res.json(response.data))
+        .catch((error) => {
+            console.error(error);
+            res.status(404).json({
+                status: 'error',
+            });
+        });
 });
 
 module.exports = router;
