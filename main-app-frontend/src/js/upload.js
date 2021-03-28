@@ -2,7 +2,7 @@
  * Modules
  */
 
-const { v4: uuidv4 } = require('uuid');
+const { nanoid } = require("nanoid");
 const base64 = require('base-64');
 const utf8 = require('utf8');
 const { showToast } = require('./toast');
@@ -116,7 +116,7 @@ const uploadFile = async () => {
     filename = file.name.toString().split('.');
     file_ext = filename[filename.length - 1];
     filename = filename.slice(0, -1).join('.');
-    fileName = `${filename}-${base64.encode(utf8.encode(uuidv4()))}.${file_ext}`;
+    fileName = `${filename}-${base64.encode(utf8.encode(nanoid(10)))}.${file_ext}`;
     await ContainerName().then((response) => {
         url = `${storageURL}${response}/${fileName}`;
         containerName = response;
