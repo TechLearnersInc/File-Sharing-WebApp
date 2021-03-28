@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
         fileSize: "1.5 GB",
         expireTime: "24 hours",
         downloadLink: "https://google.com",
-        CsrfParam: req.session.CsrfParam,
+        CsrfParam: req.csrfToken(),
     })
 });
 

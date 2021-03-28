@@ -14,21 +14,24 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+// Axios Config
+let config = {
+    method: 'post',
+    url: `${process.env.URL_SHORTENER_API}&action=create`,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    data: null,
+};
+
 // Link Generator
 router.post('/', async (req, res) => {
-    const config = {
-        method: 'post',
-        url: `${process.env.URL_SHORTENER_API}&action=create`,
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        data: JSON.stringify({
-            "filename": req.body.fileName,
-            "filesize": req.body.fileSize,
-            "container": req.body.containerName,
-            "expire": 86400, // 1 day has 86400 seconds
-        })
-    };
+    config.data = JSON.stringify({
+        "filename": req.body.fileName,
+        "filesize": req.body.fileSize,
+        "container": req.body.containerName,
+        "expire": 86400, // 1 day has 86400 seconds
+    })
     await axios(config)
         .then(response => res.json({
             shorturl: `${process.env.APP_BASE_URL}file/${response.data.url}`,

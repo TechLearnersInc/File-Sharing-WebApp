@@ -14,12 +14,14 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+// Axios Config
+const config = {
+    method: 'get',
+    url: process.env.BLOB_STORAGE_SAS_GENERATOR_API,
+};
+
 // Blob Storage SAS Get from Azure Func and Response
 router.post('/', async (req, res) => {
-    const config = {
-        method: 'get',
-        url: process.env.BLOB_STORAGE_SAS_GENERATOR_API,
-    };
     if (req.body.container_name === undefined)
         await axios(config)
             .then(response => res.json(response.data))
