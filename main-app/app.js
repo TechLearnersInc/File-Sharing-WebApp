@@ -47,6 +47,13 @@ app.use(csrfProtection);
 const public = path.join(__dirname, './public');
 app.use(express.static(public));
 
+// Ignore Favicon
+app.use((req, res, next) => {
+    if (req.originalUrl && req.originalUrl.split("/").pop() === 'favicon.ico')
+        return res.sendStatus(204);
+    else return next();
+});
+
 /**
  * Routes
  */
@@ -55,7 +62,7 @@ app.use(express.static(public));
 app.use('/', require('./routes/index'));
 
 // Download Route
-app.use('/file/:fileid', require('./routes/download'));
+app.use('/file', require('./routes/download'));
 
 // File Upload API
 // app.use('/api/upload', require('./api/upload'));
