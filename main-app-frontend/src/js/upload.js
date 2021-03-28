@@ -59,7 +59,6 @@ browseBtn.addEventListener("click", () => {
 
 dropZone.addEventListener("drop", (e) => {
     e.preventDefault();
-    //   console.log("dropped", e.dataTransfer.files[0].name);
     const files = e.dataTransfer.files;
     if (files.length === 1) {
         if (files[0].size < maxAllowedSize) {
@@ -77,14 +76,10 @@ dropZone.addEventListener("drop", (e) => {
 dropZone.addEventListener("dragover", (e) => {
     e.preventDefault();
     dropZone.classList.add("dragged");
-
-    // console.log("dropping file");
 });
 
 dropZone.addEventListener("dragleave", (e) => {
     dropZone.classList.remove("dragged");
-
-    console.log("drag ended");
 });
 
 // file input change and uploader
@@ -109,18 +104,23 @@ fileURL.addEventListener("click", () => {
 });
 
 const uploadFile = async () => {
-    console.log("file added uploading");
     const file = fileInput.files[0];
     const fileSize = file.size;
+
     let url, containerName, filename, file_ext;
     filename = file.name.toString().split('.');
     file_ext = filename[filename.length - 1];
     filename = filename.slice(0, -1).join('.');
     fileName = `${filename}-${base64.encode(utf8.encode(nanoid(10)))}.${file_ext}`;
+
+    showToast("Preparing...");
+
     await ContainerName().then((response) => {
         url = `${storageURL}${response}/${fileName}`;
         containerName = response;
     });
+
+    showToast("Almost finished preparation...");
 
     const blockBlobClient = new BlockBlobClient(
         `${url}${await sasStore.getValidSASForBlob(url)}`, // A SAS should start with "?"
@@ -141,6 +141,7 @@ const uploadFile = async () => {
             progressBar.style.transform = scaleX;
         },
     });
+
     onFileUploadSuccess(await axios.post(linkGenerateApiUrl, { fileName, fileSize, containerName })
         .then(response => JSON.stringify({
             file: response.data.shorturl,
@@ -152,14 +153,8 @@ const uploadFile = async () => {
 const onFileUploadSuccess = (res) => {
     fileInput.value = ""; // reset the input
     status.innerText = "Uploaded";
-
-    // remove the disabled attribute from form btn & make text send
-    emailForm[2].removeAttribute("disabled");
-    emailForm[2].innerText = "Send";
     progressContainer.style.display = "none"; // hide the box
-
     const { file: url } = JSON.parse(res);
-    console.log(url);
     sharingContainer.style.display = "block";
     fileURL.value = url;
 };
