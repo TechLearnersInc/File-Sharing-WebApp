@@ -13,11 +13,9 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { CsrfParamCheck } = require('../middleware/CsrfParam');
-const { log } = require("debug");
 
 // Link Generator
-router.post('/', CsrfParamCheck, async (req, res) => {
+router.post('/', async (req, res) => {
     const config = {
         method: 'post',
         url: `${process.env.URL_SHORTENER_API}&action=create`,

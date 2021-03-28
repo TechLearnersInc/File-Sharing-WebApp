@@ -13,10 +13,9 @@ if (process.env.NODE_ENV !== "production") {
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { CsrfParamCheck } = require('../middleware/CsrfParam');
 
 // Blob Storage SAS Get from Azure Func and Response
-router.post('/', CsrfParamCheck, async (req, res) => {
+router.post('/', async (req, res) => {
     const config = {
         method: 'get',
         url: process.env.BLOB_STORAGE_SAS_GENERATOR_API,

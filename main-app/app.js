@@ -14,7 +14,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const cookieSession = require('cookie-session');
+const csrf = require('csurf');
 const logger = require('morgan');
 const favicon = require('serve-favicon');
 const cors = require('cors');
@@ -22,7 +22,7 @@ const cors = require('cors');
 const app = express();
 
 const corsOptions = {
-    origin: ['http://localhost:8080', 'http://localhost:3000', 'http://192.168.1.70:8080', 'http://192.168.1.80:3000']
+    origin: ['http://192.168.1.80:3000', 'https://share.techlearners.xyz']
 };
 
 app.use(cors(corsOptions));
@@ -39,20 +39,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// Set up the cookie for the session
-app.use(cookieSession({
-    name: 'session',                               // name of the cookie
-    secret: 'STEINS_GATE',                         // key to encode session
-    maxAge: 24 * 60 * 60 * 1000,                   // cookie's lifespan
-    sameSite: 'lax',                               // controls when cookies are sent
-    path: '/',                                     // explicitly set this for security purposes
-    secure: process.env.NODE_ENV === 'production', // cookie only sent on HTTPS
-    httpOnly: true                                 // cookie is not available to JavaScript (client)
-}));
-
-// CsrfParam
-const { CsrfParam: csrf } = require('./middleware/CsrfParam');
-app.use(csrf);
+// Csrf Token
+const csrfProtection = csrf({ cookie: true });
+app.use(csrfProtection);
 
 // Static Path
 const public = path.join(__dirname, './public');
