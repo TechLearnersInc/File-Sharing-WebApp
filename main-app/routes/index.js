@@ -1,4 +1,12 @@
 /**
+ * Environment Variable.
+ */
+
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+
+/**
  * Module dependencies.
  */
 
