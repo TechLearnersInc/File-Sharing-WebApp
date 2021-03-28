@@ -5,7 +5,6 @@ const time = 3000;
 
 // The toast function
 export const showToast = (msg) => {
-    console.log("Ok");
     clearTimeout(toastTimer);
     toast.innerText = msg;
     toast.classList.add("show");
