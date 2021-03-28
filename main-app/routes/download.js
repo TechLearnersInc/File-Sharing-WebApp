@@ -34,10 +34,11 @@ const getFileInfo = async (fileid) => {
 
 // GET Download Page
 router.get('/:fileid', async (req, res) => {
-    // TODO: Download Page Creation
+    const FileInfo = await getFileInfo(req.params.fileid.toString());
+    if (!FileInfo.success) res.sendStatus(404);
     res.render('download', {
-        fileName: "Sword Art Online New Movie.mkv",
-        fileSize: "1.5 GB",
+        fileName: FileInfo.filename,
+        fileSize: `${(FileInfo.filesize / Math.pow(10, 6)).toFixed(2)} MB`,
         expireTime: "24 hours",
         downloadLink: "https://google.com",
         CsrfParam: req.csrfToken(),
