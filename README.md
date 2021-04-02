@@ -1,6 +1,6 @@
 # File Sharing WebApp
 
-A File Sharing web app built using NodeJS and also using Azure Function, Azure Blob Storage, and Redis.
+A File Sharing web app built using NodeJS and also Azure Function, Azure Blob Storage, and Redis.
 
 ## Screenshot
 
